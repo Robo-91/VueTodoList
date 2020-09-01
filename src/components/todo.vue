@@ -1,9 +1,11 @@
 <template>
   <div id="todolist">
     <ul>
-      <li v-for="todo in todos"
-          :key="todo.id">{{ todo.info }}
+      <li v-for="(todo, index) in todos"
+          :key="index">{{ todo.info }}
+          <button @click="removeTodo(index)">X</button>
       </li>
+      
     </ul>
     <input type="text" v-model='newTodo' placeholder="Add Todo Here">
     <button type="submit" @click="addTodo">Add Todo</button>
@@ -17,9 +19,9 @@ export default {
     return {
       newTodo: '',
       todos: [
-        { id: 0, info: 'Clean Room' },
-        { id: 1, info: 'Practice Guitar' },
-        { id: 2, info: 'Brush Teeth' }
+        { info: 'Clean Room' },
+        { info: 'Practice Guitar' },
+        { info: 'Brush Teeth' }
       ]
     }
   },
@@ -28,15 +30,18 @@ export default {
       console.log(this.newTodo);
     },
     addTodo() {
-      this.todos.push({ id: this.todos.length, info: this.newTodo });
+      const todoObj = { info: this.newTodo };
+      this.todos.push(todoObj);
 
       console.log(this.todos);
     },
-    removeTodo() {
-
+    removeTodo(index) {
+      this.todos.splice(index, 1);
     }
   }
 }
+
+
 
 </script>
 
