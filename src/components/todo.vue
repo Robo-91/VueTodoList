@@ -1,8 +1,8 @@
 <template>
   <div id="todolist">
     <ul>
-      <li v-for="(todo, index) in todos"
-          :key="index"><input type='checkbox'>{{ todo.info }}
+      <li v-for="(todo, index) in todos" :class="{ completed: todo.completed }"
+          :key="index" ><input type='checkbox' v-model='todo.completed'>{{ todo.info }}
           <button class='delete' @click="removeTodo(index)">X</button>
       </li>
       
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       newTodo: '',
+      completed: false,
       todos: [
         { info: 'Clean Room' },
         { info: 'Practice Guitar' },
@@ -26,14 +27,10 @@ export default {
     }
   },
   methods: {
-    viewTodos() {
-      console.log(this.newTodo);
-    },
     addTodo() {
       const todoObj = { info: this.newTodo };
       this.todos.push(todoObj);
-
-      console.log(this.todos);
+      this.newTodo = '';
     },
     removeTodo(index) {
       this.todos.splice(index, 1);
@@ -85,5 +82,8 @@ export default {
   }
   .add:hover {
     box-shadow: inset 0px 0px 50px -27px rgba(0,0,0,1);
+  }
+  .completed {
+    text-decoration: line-through;
   }
 </style>
