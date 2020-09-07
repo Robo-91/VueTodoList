@@ -29,8 +29,13 @@ export default {
   methods: {
     addTodo() {
       const todoObj = { info: this.newTodo };
-      this.todos.push(todoObj);
-      this.newTodo = '';
+      if (this.newTodo === '') {
+        alert('Please Enter an item!');
+        return null;
+      } else {
+        this.todos.push(todoObj);
+        this.newTodo = '';
+      }
     },
     removeTodo(index) {
       this.todos.splice(index, 1);
