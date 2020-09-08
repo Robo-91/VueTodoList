@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(todo, index) in todos" :class="{ completed: todo.completed }"
           :key="index" ><input type='checkbox' v-model='todo.completed'>{{ todo.info }}
-          <button class='delete' @click="removeTodo(index)">X</button>
+          <button class='delete' placeholder="X" @click="removeTodo(index)"></button>
       </li>
       
     </ul>
